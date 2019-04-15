@@ -9,11 +9,13 @@
 **1、什么是Circular positioning呢？**
 之所以称之为圆形定位，它就是以目标控件为圆心，通过设置角度和半径确定我们当前控件的位置，如官方图：
 ![Circular Positioning](https://img-blog.csdnimg.cn/20190415093334636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NhbGxlZEpva2Vy,size_16,color_FFFFFF,t_70)
+
 **2、目标**
 
 我们先来看一下效果：
 ![效果图](https://mmbiz.qpic.cn/mmbiz_gif/MOu2ZNAwZwNUY4FqNvI53jRxjglHEKZVGauvf3oHEP49vzG049w1E8pmmblnbfib0GUsStY9h8QxRZfEuYzwAew/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1)
-**2、设置布局**
+
+**3、设置布局**
 
 布局的xml文件比较长，内容其实很简单，主要是四个 `FloatingActionButton` 和三个 `Group`，`Group` 在的 `ConstraintLayout` 中用来统一的控制视图的显示和隐藏，如果只用一个 `Group` 并不能让我们的控件有序的显示和隐藏，而 `FloatingActionButton` 由于不能使用 `setVisibility` 方法，只能使用 `Group` 管理 `FloatingActionButton` 的显示和隐藏，因此使用三个 `Group` 来实现上图三个 `FloatingActionButton` 有序的显示和隐藏（本来打算使用 `FloatingActionButton` 代替 `ImageView` 减少工作量的， `FloatingActionButton`导致的问题反而使工作量增加了，哈哈～）, **`activity_main.xml`** 如下：
 ```xml
@@ -109,7 +111,8 @@
 
 </android.support.constraint.ConstraintLayout>
 ```
-**3、业务逻辑**
+
+**4、业务逻辑**
 
 首先确定我们需要使用的实例：
 
@@ -300,6 +303,7 @@ public class UiUtils {
 这样写完效果就出来了：
 
 ![初步效果](https://mmbiz.qpic.cn/mmbiz_gif/MOu2ZNAwZwNUY4FqNvI53jRxjglHEKZVhPyZZwzeJ9icHib5picsibOuVhs77icOlXDIn4r7Uu8xxtiaEBemicbeK5GIA/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1)
+
 如果你觉得弹出的曲线不够圆滑，你可以在 `getValueAnimator` 方法中取消对 `//params.circleAngle = 270f + angle * v;` 这行的注释，效果就如本章一开始的效果。
 
 ## 总结

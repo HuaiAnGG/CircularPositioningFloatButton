@@ -119,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
                 float v = (float) animation.getAnimatedValue();
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) button.getLayoutParams();
                 params.circleRadius = (int) (radius * v);
-                //params.circleAngle = 270f + angle * v;
+                // 觉得弹出的曲线不够圆滑,可以取消下面的注释
+//                params.circleAngle = 270f + angle * v;
                 params.width = (int) (width * v);
                 params.height = (int) (width * v);
                 button.setLayoutParams(params);

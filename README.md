@@ -26,113 +26,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    
+    <!--默认隐藏部分代码-->
+    <android.support.design.widget.FloatingActionButton
+        
+        ···
+        />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/colorAccent"
-        android:padding="10dp"
-        android:src="@drawable/ic_fb_add"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:pressedTranslationZ="20dp"
-        app:rippleColor="#1f000000" />
+        ···
+        />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_like"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:visibility="gone"
-        android:backgroundTint="@color/colorAccent"
-        android:padding="10dp"
-        android:src="@drawable/ic_fb_like"
-        app:fabSize="normal"
-        app:layout_constraintCircle="@+id/fab_add"
-        app:layout_constraintCircleRadius="80dp"
-        app:layout_constraintCircleAngle="270"
-        app:pressedTranslationZ="20dp"
-        app:rippleColor="#1f000000" />
+        ···
+        />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_write"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/colorAccent"
-        android:padding="10dp"
-        android:src="@drawable/ic_fb_write"
-        app:fabSize="normal"
-        app:layout_constraintCircle="@+id/fab_add"
-        app:layout_constraintCircleRadius="80dp"
-        app:layout_constraintCircleAngle="315"
-        app:pressedTranslationZ="20dp"
-        app:rippleColor="#1f000000" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/colorAccent"
-        android:padding="10dp"
-        android:src="@drawable/ic_fb_top"
-        app:fabSize="normal"
-        app:layout_constraintCircle="@+id/fab_add"
-        app:layout_constraintCircleRadius="80dp"
-        app:layout_constraintCircleAngle="360"
-        app:pressedTranslationZ="20dp"
-        app:rippleColor="#1f000000" />
+        ···
+        />
 
     <android.support.constraint.Group
-        android:id="@+id/gp_like"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="fab_like"/>
+        ···
+        />
 
     <android.support.constraint.Group
-        android:id="@+id/gp_write"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="fab_write"/>
+        ···
+        />
 
     <android.support.constraint.Group
-        android:id="@+id/gp_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="fab_top"/>
+        ···
+        />
 
 </android.support.constraint.ConstraintLayout>
 ```
 
 **4、业务逻辑**
 
-首先确定我们需要使用的实例：
-
-```java
-private FloatingActionButton mAdd;
-private FloatingActionButton mLike;
-private FloatingActionButton mWrite;
-private FloatingActionButton mTop;
-private Group likeGroup;
-private Group writeGroup;
-private Group topGroup;
-// 动画集合，用来控制动画的有序播放
-private AnimatorSet animatorSet;
-// 圆的半径
-private int radius;
-// FloatingActionButton宽度和高度，宽高一样
-private int width;
-```
-
-接着初始化我们的控件，这里的代码比较简单，`initListener()` 我们放在后面介绍：
+初始化我们的控件，这里的代码比较简单，`initListener()` 我们放在后面介绍：
 
 ```java
 @Override
@@ -179,6 +109,7 @@ private void setViewVisible(boolean isShow) {
 ```
 
 我们的重点就在 `initListener()` 里面，思路就是利用属性动画控制 `ConstraintLayout.LayoutParams`，从而控制 `Circular positioning` 的角度和半径：
+
 ```java 
 private void initListener() {
     mAdd.setOnClickListener(new View.OnClickListener() {
@@ -275,30 +206,6 @@ abstract class SimpleAnimation implements Animator.AnimatorListener{
 }
 ```
 
-屏幕工具类
-```java
-/**
- * @description: 屏幕的工具类
- * @author: HuaiAngg
- * @create: 2019-04-15 8:49
- */
-public class UiUtils {
-
-    public static int dp2px(Context context, float dpValue) {
-        float scale = context.getResources()
-        	.getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    public static int sp2px(Context context, float spValue) {
-        float fontScale = context.getResources()
-        	.getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
-    }
-
-}
-
-```
 
 这样写完效果就出来了：
 
